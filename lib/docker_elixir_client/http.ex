@@ -3,14 +3,19 @@ defmodule DockerElixirClient.HTTP do
     HTTPoison.get(url)
   end
 
-  def get(url, opts) when is_map(opts) do
-    (url <> "?#{encode_query_params(opts)}")
+  def get(url, params) when is_map(params) do
+    (url <> "?#{encode_query_params(params)}")
     |> HTTPoison.get()
     |> handle_response
   end
 
-  def post(url, opts \\ %{}) do
-    HTTPoison.post(url, Poison.encode!(opts), %{"Content-Type" => "application/json"})
+  def post(url, params \\ %{}) do
+    HTTPoison.post(url, Poison.encode!(params), %{"Content-Type" => "application/json"})
+    |> handle_response
+  end
+
+  def put(url, params \\ %{}) do
+    HTTPoison.put(url, Poison.encode!(params), %{"Content-Type" => "application/json"})
     |> handle_response
   end
 
@@ -19,8 +24,8 @@ defmodule DockerElixirClient.HTTP do
     |> handle_response
   end
 
-  def delete(url, opts) do
-    (url <> "?#{encode_query_params(opts)}")
+  def delete(url, params) do
+    (url <> "?#{encode_query_params(params)}")
     |> HTTPoison.delete()
     |> handle_response
   end
@@ -79,7 +84,7 @@ defmodule DockerElixirClient.HTTP do
     end
   end
 
-  defp encode_query_params(opts) do
-    URI.encode_query(opts)
+  defp encode_query_params(params) do
+    URI.encode_query(params)
   end
 end
