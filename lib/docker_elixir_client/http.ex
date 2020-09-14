@@ -4,7 +4,7 @@ defmodule DockerElixirClient.HTTP do
   end
 
   def get(url, params) when is_map(params) do
-    (url <> "?#{encode_query_params(params)}")
+    "#{url}?#{encode_query_params(params)}"
     |> HTTPoison.get()
     |> handle_response
   end
@@ -25,7 +25,7 @@ defmodule DockerElixirClient.HTTP do
   end
 
   def delete(url, params) do
-    (url <> "?#{encode_query_params(params)}")
+    "#{url}?#{encode_query_params(params)}"
     |> HTTPoison.delete()
     |> handle_response
   end
