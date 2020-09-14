@@ -30,31 +30,7 @@ defmodule DockerElixirClient.HTTP do
     |> handle_response
   end
 
-  def handle_response({:ok, %HTTPoison.Response{status_code: 200, body: _body}} = resp) do
-    parse_response(resp)
-  end
-
-  def handle_response({:ok, %HTTPoison.Response{status_code: 201, body: _body}} = resp) do
-    parse_response(resp)
-  end
-
-  def handle_response({:ok, %HTTPoison.Response{status_code: 204, body: _body}} = resp) do
-    parse_response(resp)
-  end
-
-  def handle_response({:ok, %HTTPoison.Response{status_code: 301, body: _body}} = resp) do
-    parse_response(resp)
-  end
-
-  def handle_response({:ok, %HTTPoison.Response{status_code: 304, body: _body}} = resp) do
-    parse_response(resp)
-  end
-
-  def handle_response({:ok, %HTTPoison.Response{status_code: 404, body: _body}} = resp) do
-    parse_response(resp)
-  end
-
-  def handle_response({:ok, %HTTPoison.Response{status_code: 500, body: _body}} = resp) do
+  def handle_response({:ok, %HTTPoison.Response{status_code: _status_code, body: _body}} = resp) do
     parse_response(resp)
   end
 
