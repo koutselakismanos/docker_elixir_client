@@ -30,7 +30,7 @@ defmodule DockerElixirClient.Container do
   end
 
   @doc """
-  Get container logs
+  Get `stdout` and `stderr` logs from a container
   """
   def get_logs(host, id, params \\ %{}) do
     HTTP.get(host <> "/containers/#{id}/logs", params)
