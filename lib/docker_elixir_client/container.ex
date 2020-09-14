@@ -1,4 +1,4 @@
-defmodule DockerElixirClient.Containers do
+defmodule DockerElixirClient.Container do
   alias DockerElixirClient.HTTP
 
   def all(host) when is_binary(host) do
