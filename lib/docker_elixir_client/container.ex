@@ -4,36 +4,46 @@ defmodule DockerElixirClient.Container do
   @doc """
   Returns a list of containers
   """
-  def list(host, params \\ %{}) do
-    HTTP.get("#{host}/containers/json", params)
+  def list(params \\ %{}, opts \\ []) do
+    "/containers/json"
+    |> HTTP.add_query_params(params)
+    |> HTTP.send_request(:get, "", [], opts)
   end
 
   @doc """
   Create a container
   """
-  def create(host, params \\ %{}) do
-    HTTP.post("#{host}/containers/create", params)
+  def create(body \\ %{}, params \\ %{}, opts \\ []) do
+    "/containers/create"
+    |> HTTP.add_query_params(params)
+    |> HTTP.send_request(:post, body, [], opts)
   end
 
   @doc """
   Return low-level information about a container
   """
-  def inspect(host, id, params \\ %{}) do
-    HTTP.get("#{host}/containers/#{id}/json", params)
+  def inspect(id, body \\ %{}, params \\ %{}, opts \\ []) do
+    "/containers/#{id}/json"
+    |> HTTP.add_query_params(params)
+    |> HTTP.send_request(:get, body, [], opts)
   end
 
   @doc """
   List processes running inside a container. Only unix
   """
-  def list_processes(host, id, params \\ %{}) do
-    HTTP.get("#{host}/containers/#{id}/top", params)
+  def list_processes(id, params \\ %{}, opts \\ []) do
+    "/containers/#{id}/top"
+    |> HTTP.add_query_params(params)
+    |> HTTP.send_request(:get, "", [], opts)
   end
 
   @doc """
   Get `stdout` and `stderr` logs from a container
   """
-  def get_logs(host, id, params \\ %{}) do
-    HTTP.get("#{host}/containers/#{id}/logs", params)
+  def get_logs(id, params \\ %{}, opts \\ []) do
+    "/containers/#{id}/logs"
+    |> HTTP.add_query_params(params)
+    |> HTTP.send_request(:get, "", [], opts)
   end
 
   @doc """
@@ -44,106 +54,154 @@ defmodule DockerElixirClient.Container do
   1: Added
   2: Deleted
   """
-  def get_changes(host, id) do
-    HTTP.get("#{host}/containers/#{id}/changes")
+  def changes(id, params \\ %{}, opts \\ []) do
+    "/containers/#{id}/changes"
+    |> HTTP.add_query_params(params)
+    |> HTTP.send_request(:get, "", [], opts)
   end
 
   @doc """
   Export the contents of a container as a tarball
   """
-  def export(host, id) do
-    HTTP.get("#{host}/containers/#{id}/export")
+  def export(id, params \\ %{}, opts \\ []) do
+    "/containers/#{id}/export"
+    |> HTTP.add_query_params(params)
+    |> HTTP.send_request(:get, "", [], opts)
+  end
+
+  @doc """
+  Get container stats based on resource usage
+  """
+  def stats(id, params \\ %{}, opts \\ []) do
+    "/containers/#{id}/stats"
+    |> HTTP.add_query_params(params)
+    |> HTTP.send_request(:get, "", [], opts)
+  end
+
+  @doc """
+  Get container stats based on resource usage
+  """
+  def resize(id, params \\ %{}, opts \\ []) do
+    "/containers/#{id}/resize"
+    |> HTTP.add_query_params(params)
+    |> HTTP.send_request(:post, "", [], opts)
   end
 
   @doc """
   Start a container
   """
-  def start(host, id, params \\ %{}) do
-    HTTP.post("#{host}/containers/#{id}/start", params)
+  def start(id, params \\ %{}, opts \\ []) do
+    "/containers/#{id}/start"
+    |> HTTP.add_query_params(params)
+    |> HTTP.send_request(:post, "", [], opts)
   end
 
   @doc """
   Stop a container
   """
-  def stop(host, id, params \\ %{}) do
-    HTTP.post("#{host}/containers/#{id}/stop", params)
+  def stop(id, params \\ %{}, opts \\ []) do
+    "/containers/#{id}/stop"
+    |> HTTP.add_query_params(params)
+    |> HTTP.send_request(:post, "", [], opts)
   end
 
   @doc """
   Restart a container
   """
-  def restart(host, id, params \\ %{}) do
-    HTTP.post("#{host}/containers/#{id}/restart", params)
+  def restart(id, params \\ %{}, opts \\ []) do
+    "/containers/#{id}/restart"
+    |> HTTP.add_query_params(params)
+    |> HTTP.send_request(:post, "", [], opts)
   end
 
   @doc """
   Kill a container by sending a POSIX signal to a container,
   defaulting to killing to the container
   """
-  def kill(host, id, params \\ %{}) do
-    HTTP.post("#{host}/containers/#{id}/kill", params)
+  def kill(id, params \\ %{}, opts \\ []) do
+    "/containers/#{id}/kill"
+    |> HTTP.add_query_params(params)
+    |> HTTP.send_request(:post, "", [], opts)
   end
 
   @doc """
   Update a container
   """
-  def update(host, id) do
-    HTTP.post("#{host}/containers/#{id}/update")
+  def update(id, body \\ %{}, params \\ %{}, opts \\ []) do
+    "/containers/#{id}/update"
+    |> HTTP.add_query_params(params)
+    |> HTTP.send_request(:post, body, [], opts)
   end
 
   @doc """
   Rename a container
   """
-  def rename(host, id) do
-    HTTP.post("#{host}/containers/#{id}/rename")
+  def rename(id, params \\ %{}, opts \\ []) do
+    "/containers/#{id}/rename"
+    |> HTTP.add_query_params(params)
+    |> HTTP.send_request(:post, "", [], opts)
   end
 
   @doc """
   Pause a container
   """
-  def pause(host, id) do
-    HTTP.post("#{host}/containers/#{id}/pause")
+  def pause(id, params \\ %{}, opts \\ []) do
+    "/containers/#{id}/pause"
+    |> HTTP.add_query_params(params)
+    |> HTTP.send_request(:post, "", [], opts)
   end
 
   @doc """
   Unpause a container
   """
-  def unpause(host, id) do
-    HTTP.post("#{host}/containers/#{id}/unpause")
+  def unpause(id, params \\ %{}, opts \\ []) do
+    "/containers/#{id}/unpause"
+    |> HTTP.add_query_params(params)
+    |> HTTP.send_request(:post, "", [], opts)
   end
 
   @doc """
   Wait for a container
   """
-  def wait(host, id, params \\ %{}) do
-    HTTP.post("#{host}/containers/#{id}/unpause", params)
+  def wait(id, params \\ %{}, opts \\ []) do
+    "/containers/#{id}/wait"
+    |> HTTP.add_query_params(params)
+    |> HTTP.send_request(:post, "", [], opts)
   end
 
   @doc """
   Remove a container
   """
-  def remove(host, id, params \\ %{}) do
-    HTTP.post("#{host}/containers/#{id}", params)
+  def remove(id, params \\ %{}, opts \\ []) do
+    "/containers/#{id}"
+    |> HTTP.add_query_params(params)
+    |> HTTP.send_request(:delete, "", [], opts)
   end
 
   @doc """
   Get an archive of a filesystem resource in a container
   """
-  def get_archive(host, id, params \\ %{}) do
-    HTTP.get("#{host}/containers/#{id}/archive", params)
+  def get_archive(id, params \\ %{}, opts \\ []) do
+    "/containers/#{id}/archive"
+    |> HTTP.add_query_params(params)
+    |> HTTP.send_request(:get, "", [], opts)
   end
 
   @doc """
   Extract an archive of files or folders to a directory in a container
   """
-  def extract_archive(host, id, params \\ %{}) do
-    HTTP.put("#{host}/containers/#{id}/archive", params)
+  def extract_archive(id, params \\ %{}, opts \\ []) do
+    "/containers/#{id}/archive"
+    |> HTTP.add_query_params(params)
+    |> HTTP.send_request(:put, "", [], opts)
   end
 
   @doc """
   Delete stopped containers
   """
-  def delete_stopped(host, params \\ %{}) do
-    HTTP.post("#{host}/containers/prune", params)
+  def delete_stopped(params \\ %{}, opts \\ []) do
+    "/containers/prune"
+    |> HTTP.add_query_params(params)
+    |> HTTP.send_request(:post, "", [], opts)
   end
 end
