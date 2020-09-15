@@ -7,7 +7,7 @@ defmodule DockerElixirClient.Container do
   def list(params \\ %{}, opts \\ []) do
     "/containers/json"
     |> HTTP.add_query_params(params)
-    |> HTTP.send_request(:get, "", [], opts)
+    |> HTTP.send_request(:get, %{}, [], opts)
   end
 
   @doc """
@@ -34,7 +34,7 @@ defmodule DockerElixirClient.Container do
   def list_processes(id, params \\ %{}, opts \\ []) do
     "/containers/#{id}/top"
     |> HTTP.add_query_params(params)
-    |> HTTP.send_request(:get, "", [], opts)
+    |> HTTP.send_request(:get, %{}, [], opts)
   end
 
   @doc """
@@ -43,7 +43,7 @@ defmodule DockerElixirClient.Container do
   def get_logs(id, params \\ %{}, opts \\ []) do
     "/containers/#{id}/logs"
     |> HTTP.add_query_params(params)
-    |> HTTP.send_request(:get, "", [], opts)
+    |> HTTP.send_request(:get, %{}, [], opts)
   end
 
   @doc """
@@ -57,7 +57,7 @@ defmodule DockerElixirClient.Container do
   def changes(id, params \\ %{}, opts \\ []) do
     "/containers/#{id}/changes"
     |> HTTP.add_query_params(params)
-    |> HTTP.send_request(:get, "", [], opts)
+    |> HTTP.send_request(:get, %{}, [], opts)
   end
 
   @doc """
@@ -66,7 +66,7 @@ defmodule DockerElixirClient.Container do
   def export(id, params \\ %{}, opts \\ []) do
     "/containers/#{id}/export"
     |> HTTP.add_query_params(params)
-    |> HTTP.send_request(:get, "", [], opts)
+    |> HTTP.send_request(:get, %{}, [], opts)
   end
 
   @doc """
@@ -75,7 +75,7 @@ defmodule DockerElixirClient.Container do
   def stats(id, params \\ %{}, opts \\ []) do
     "/containers/#{id}/stats"
     |> HTTP.add_query_params(params)
-    |> HTTP.send_request(:get, "", [], opts)
+    |> HTTP.send_request(:get, %{}, [], opts)
   end
 
   @doc """
@@ -84,7 +84,7 @@ defmodule DockerElixirClient.Container do
   def resize(id, params \\ %{}, opts \\ []) do
     "/containers/#{id}/resize"
     |> HTTP.add_query_params(params)
-    |> HTTP.send_request(:post, "", [], opts)
+    |> HTTP.send_request(:post, %{}, [], opts)
   end
 
   @doc """
@@ -93,7 +93,7 @@ defmodule DockerElixirClient.Container do
   def start(id, params \\ %{}, opts \\ []) do
     "/containers/#{id}/start"
     |> HTTP.add_query_params(params)
-    |> HTTP.send_request(:post, "", [], opts)
+    |> HTTP.send_request(:post, %{}, [], opts)
   end
 
   @doc """
@@ -102,7 +102,7 @@ defmodule DockerElixirClient.Container do
   def stop(id, params \\ %{}, opts \\ []) do
     "/containers/#{id}/stop"
     |> HTTP.add_query_params(params)
-    |> HTTP.send_request(:post, "", [], opts)
+    |> HTTP.send_request(:post, %{}, [], opts)
   end
 
   @doc """
@@ -111,7 +111,7 @@ defmodule DockerElixirClient.Container do
   def restart(id, params \\ %{}, opts \\ []) do
     "/containers/#{id}/restart"
     |> HTTP.add_query_params(params)
-    |> HTTP.send_request(:post, "", [], opts)
+    |> HTTP.send_request(:post, %{}, [], opts)
   end
 
   @doc """
@@ -121,7 +121,7 @@ defmodule DockerElixirClient.Container do
   def kill(id, params \\ %{}, opts \\ []) do
     "/containers/#{id}/kill"
     |> HTTP.add_query_params(params)
-    |> HTTP.send_request(:post, "", [], opts)
+    |> HTTP.send_request(:post, %{}, [], opts)
   end
 
   @doc """
@@ -139,7 +139,7 @@ defmodule DockerElixirClient.Container do
   def rename(id, params \\ %{}, opts \\ []) do
     "/containers/#{id}/rename"
     |> HTTP.add_query_params(params)
-    |> HTTP.send_request(:post, "", [], opts)
+    |> HTTP.send_request(:post, %{}, [], opts)
   end
 
   @doc """
@@ -148,7 +148,7 @@ defmodule DockerElixirClient.Container do
   def pause(id, params \\ %{}, opts \\ []) do
     "/containers/#{id}/pause"
     |> HTTP.add_query_params(params)
-    |> HTTP.send_request(:post, "", [], opts)
+    |> HTTP.send_request(:post, %{}, [], opts)
   end
 
   @doc """
@@ -157,7 +157,7 @@ defmodule DockerElixirClient.Container do
   def unpause(id, params \\ %{}, opts \\ []) do
     "/containers/#{id}/unpause"
     |> HTTP.add_query_params(params)
-    |> HTTP.send_request(:post, "", [], opts)
+    |> HTTP.send_request(:post, %{}, [], opts)
   end
 
   @doc """
@@ -166,7 +166,7 @@ defmodule DockerElixirClient.Container do
   def wait(id, params \\ %{}, opts \\ []) do
     "/containers/#{id}/wait"
     |> HTTP.add_query_params(params)
-    |> HTTP.send_request(:post, "", [], opts)
+    |> HTTP.send_request(:post, %{}, [], opts)
   end
 
   @doc """
@@ -175,7 +175,7 @@ defmodule DockerElixirClient.Container do
   def remove(id, params \\ %{}, opts \\ []) do
     "/containers/#{id}"
     |> HTTP.add_query_params(params)
-    |> HTTP.send_request(:delete, "", [], opts)
+    |> HTTP.send_request(:delete, %{}, [], opts)
   end
 
   @doc """
@@ -184,7 +184,7 @@ defmodule DockerElixirClient.Container do
   def get_archive(id, params \\ %{}, opts \\ []) do
     "/containers/#{id}/archive"
     |> HTTP.add_query_params(params)
-    |> HTTP.send_request(:get, "", [], opts)
+    |> HTTP.send_request(:get, %{}, [], opts)
   end
 
   @doc """
@@ -193,7 +193,7 @@ defmodule DockerElixirClient.Container do
   def extract_archive(id, params \\ %{}, opts \\ []) do
     "/containers/#{id}/archive"
     |> HTTP.add_query_params(params)
-    |> HTTP.send_request(:put, "", [], opts)
+    |> HTTP.send_request(:put, %{}, [], opts)
   end
 
   @doc """
@@ -202,6 +202,6 @@ defmodule DockerElixirClient.Container do
   def delete_stopped(params \\ %{}, opts \\ []) do
     "/containers/prune"
     |> HTTP.add_query_params(params)
-    |> HTTP.send_request(:post, "", [], opts)
+    |> HTTP.send_request(:post, %{}, [], opts)
   end
 end
