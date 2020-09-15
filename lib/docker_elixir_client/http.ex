@@ -6,7 +6,6 @@ defmodule DockerElixirClient.HTTP do
       connect_timeout: 5000,
       recv_timeout: 30000,
       timeout: 30000
-      # stream_to: self()
     ]
   end
 
