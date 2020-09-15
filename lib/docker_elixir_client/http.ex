@@ -24,19 +24,11 @@ defmodule DockerElixirClient.HTTP do
     "#{url}?#{URI.encode_query(params)}"
   end
 
-  def process_request_body("") do
-    ""
-  end
+  def process_request_body(""), do: ""
 
-  def process_request_body(body) do
-    Poison.encode!(body)
-  end
+  def process_request_body(body), do: Poison.encode!(body)
 
-  def process_response_body("") do
-    ""
-  end
+  def process_response_body(""), do: ""
 
-  def process_response_body(body) do
-    Poison.decode!(body)
-  end
+  def process_response_body(body), do: Poison.decode!(body)
 end
