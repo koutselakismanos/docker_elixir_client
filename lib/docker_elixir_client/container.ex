@@ -1,11 +1,13 @@
 defmodule DockerElixirClient.Container do
   alias DockerElixirClient.HTTP
 
+  @context "containers"
+
   @doc """
   Returns a list of containers
   """
   def list(params \\ %{}, opts \\ []) do
-    "/containers/json"
+    "/#{@context}/json"
     |> HTTP.add_query_params(params)
     |> HTTP.send_request(:get, %{}, [], opts)
   end
@@ -14,7 +16,7 @@ defmodule DockerElixirClient.Container do
   Create a container
   """
   def create(body \\ %{}, params \\ %{}, opts \\ []) do
-    "/containers/create"
+    "/#{@context}/create"
     |> HTTP.add_query_params(params)
     |> HTTP.send_request(:post, body, [], opts)
   end
@@ -23,7 +25,7 @@ defmodule DockerElixirClient.Container do
   Return low-level information about a container
   """
   def inspect(id, body \\ %{}, params \\ %{}, opts \\ []) do
-    "/containers/#{id}/json"
+    "/#{@context}/#{id}/json"
     |> HTTP.add_query_params(params)
     |> HTTP.send_request(:get, body, [], opts)
   end
@@ -32,7 +34,7 @@ defmodule DockerElixirClient.Container do
   List processes running inside a container. Only unix
   """
   def list_processes(id, params \\ %{}, opts \\ []) do
-    "/containers/#{id}/top"
+    "/#{@context}/#{id}/top"
     |> HTTP.add_query_params(params)
     |> HTTP.send_request(:get, %{}, [], opts)
   end
@@ -41,7 +43,7 @@ defmodule DockerElixirClient.Container do
   Get `stdout` and `stderr` logs from a container
   """
   def get_logs(id, params \\ %{}, opts \\ []) do
-    "/containers/#{id}/logs"
+    "/#{@context}/#{id}/logs"
     |> HTTP.add_query_params(params)
     |> HTTP.send_request(:get, %{}, [], opts)
   end
@@ -55,7 +57,7 @@ defmodule DockerElixirClient.Container do
   2: Deleted
   """
   def changes(id, params \\ %{}, opts \\ []) do
-    "/containers/#{id}/changes"
+    "/#{@context}/#{id}/changes"
     |> HTTP.add_query_params(params)
     |> HTTP.send_request(:get, %{}, [], opts)
   end
@@ -64,7 +66,7 @@ defmodule DockerElixirClient.Container do
   Export the contents of a container as a tarball
   """
   def export(id, params \\ %{}, opts \\ []) do
-    "/containers/#{id}/export"
+    "/#{@context}/#{id}/export"
     |> HTTP.add_query_params(params)
     |> HTTP.send_request(:get, %{}, [], opts)
   end
@@ -73,7 +75,7 @@ defmodule DockerElixirClient.Container do
   Get container stats based on resource usage
   """
   def stats(id, params \\ %{}, opts \\ []) do
-    "/containers/#{id}/stats"
+    "/#{@context}/#{id}/stats"
     |> HTTP.add_query_params(params)
     |> HTTP.send_request(:get, %{}, [], opts)
   end
@@ -82,7 +84,7 @@ defmodule DockerElixirClient.Container do
   Get container stats based on resource usage
   """
   def resize(id, params \\ %{}, opts \\ []) do
-    "/containers/#{id}/resize"
+    "/#{@context}/#{id}/resize"
     |> HTTP.add_query_params(params)
     |> HTTP.send_request(:post, %{}, [], opts)
   end
@@ -91,7 +93,7 @@ defmodule DockerElixirClient.Container do
   Start a container
   """
   def start(id, params \\ %{}, opts \\ []) do
-    "/containers/#{id}/start"
+    "/#{@context}/#{id}/start"
     |> HTTP.add_query_params(params)
     |> HTTP.send_request(:post, %{}, [], opts)
   end
@@ -100,7 +102,7 @@ defmodule DockerElixirClient.Container do
   Stop a container
   """
   def stop(id, params \\ %{}, opts \\ []) do
-    "/containers/#{id}/stop"
+    "/#{@context}/#{id}/stop"
     |> HTTP.add_query_params(params)
     |> HTTP.send_request(:post, %{}, [], opts)
   end
@@ -109,7 +111,7 @@ defmodule DockerElixirClient.Container do
   Restart a container
   """
   def restart(id, params \\ %{}, opts \\ []) do
-    "/containers/#{id}/restart"
+    "/#{@context}/#{id}/restart"
     |> HTTP.add_query_params(params)
     |> HTTP.send_request(:post, %{}, [], opts)
   end
@@ -119,7 +121,7 @@ defmodule DockerElixirClient.Container do
   defaulting to killing to the container
   """
   def kill(id, params \\ %{}, opts \\ []) do
-    "/containers/#{id}/kill"
+    "/#{@context}/#{id}/kill"
     |> HTTP.add_query_params(params)
     |> HTTP.send_request(:post, %{}, [], opts)
   end
@@ -128,7 +130,7 @@ defmodule DockerElixirClient.Container do
   Update a container
   """
   def update(id, body \\ %{}, params \\ %{}, opts \\ []) do
-    "/containers/#{id}/update"
+    "/#{@context}/#{id}/update"
     |> HTTP.add_query_params(params)
     |> HTTP.send_request(:post, body, [], opts)
   end
@@ -137,7 +139,7 @@ defmodule DockerElixirClient.Container do
   Rename a container
   """
   def rename(id, params \\ %{}, opts \\ []) do
-    "/containers/#{id}/rename"
+    "/#{@context}/#{id}/rename"
     |> HTTP.add_query_params(params)
     |> HTTP.send_request(:post, %{}, [], opts)
   end
@@ -146,7 +148,7 @@ defmodule DockerElixirClient.Container do
   Pause a container
   """
   def pause(id, params \\ %{}, opts \\ []) do
-    "/containers/#{id}/pause"
+    "/#{@context}/#{id}/pause"
     |> HTTP.add_query_params(params)
     |> HTTP.send_request(:post, %{}, [], opts)
   end
@@ -155,7 +157,7 @@ defmodule DockerElixirClient.Container do
   Unpause a container
   """
   def unpause(id, params \\ %{}, opts \\ []) do
-    "/containers/#{id}/unpause"
+    "/#{@context}/#{id}/unpause"
     |> HTTP.add_query_params(params)
     |> HTTP.send_request(:post, %{}, [], opts)
   end
@@ -164,7 +166,7 @@ defmodule DockerElixirClient.Container do
   Wait for a container
   """
   def wait(id, params \\ %{}, opts \\ []) do
-    "/containers/#{id}/wait"
+    "/#{@context}/#{id}/wait"
     |> HTTP.add_query_params(params)
     |> HTTP.send_request(:post, %{}, [], opts)
   end
@@ -173,7 +175,7 @@ defmodule DockerElixirClient.Container do
   Remove a container
   """
   def remove(id, params \\ %{}, opts \\ []) do
-    "/containers/#{id}"
+    "/#{@context}/#{id}"
     |> HTTP.add_query_params(params)
     |> HTTP.send_request(:delete, %{}, [], opts)
   end
@@ -182,7 +184,7 @@ defmodule DockerElixirClient.Container do
   Get an archive of a filesystem resource in a container
   """
   def get_archive(id, params \\ %{}, opts \\ []) do
-    "/containers/#{id}/archive"
+    "/#{@context}/#{id}/archive"
     |> HTTP.add_query_params(params)
     |> HTTP.send_request(:get, %{}, [], opts)
   end
@@ -191,7 +193,7 @@ defmodule DockerElixirClient.Container do
   Extract an archive of files or folders to a directory in a container
   """
   def extract_archive(id, params \\ %{}, opts \\ []) do
-    "/containers/#{id}/archive"
+    "/#{@context}/#{id}/archive"
     |> HTTP.add_query_params(params)
     |> HTTP.send_request(:put, %{}, [], opts)
   end
@@ -200,7 +202,7 @@ defmodule DockerElixirClient.Container do
   Delete stopped containers
   """
   def delete_stopped(params \\ %{}, opts \\ []) do
-    "/containers/prune"
+    "/#{@context}/prune"
     |> HTTP.add_query_params(params)
     |> HTTP.send_request(:post, %{}, [], opts)
   end
