@@ -50,14 +50,14 @@ defmodule DockerElixirClient.Swarm do
   """
   def get_unlock_key(opts \\ []) do
     "/#{@context}/unlockkey"
-    |> HTTP.send_request(:post, %{}, [], opts)
+    |> HTTP.send_request(:get, %{}, [], opts)
   end
 
   @doc """
   Unlock a locked manager
   """
   def unlock_manager(body \\ %{}, opts \\ []) do
-    "/#{@context}/unlockkey"
+    "/#{@context}/unlock"
     |> HTTP.send_request(:post, body, [], opts)
   end
 end
