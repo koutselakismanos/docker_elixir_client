@@ -1,11 +1,13 @@
 defmodule DockerElixirClient.Swarm do
   alias DockerElixirClient.HTTP
 
+  @context "swarm"
+
   @doc """
   Inpsect swarm
   """
   def inspect(opts \\ []) do
-    "/swarm"
+    "/#{@context}"
     |> HTTP.send_request(:get, %{}, [], opts)
   end
 
@@ -13,7 +15,7 @@ defmodule DockerElixirClient.Swarm do
   Initialize a new swarm
   """
   def initialize(body \\ %{}, opts \\ []) do
-    "/swarm/init"
+    "/#{@context}/init"
     |> HTTP.send_request(:post, body, [], opts)
   end
 
@@ -21,7 +23,7 @@ defmodule DockerElixirClient.Swarm do
   Join an existing swarm
   """
   def join(body \\ %{}, opts \\ []) do
-    "/swarm/join"
+    "/#{@context}/join"
     |> HTTP.send_request(:post, body, [], opts)
   end
 
@@ -29,7 +31,7 @@ defmodule DockerElixirClient.Swarm do
   Leave a swarm
   """
   def leave(params \\ %{}, opts \\ []) do
-    "/swarm/leave"
+    "/#{@context}/leave"
     |> HTTP.add_query_params(params)
     |> HTTP.send_request(:post, %{}, [], opts)
   end
@@ -38,7 +40,7 @@ defmodule DockerElixirClient.Swarm do
   Update a swarm
   """
   def update(body \\ %{}, params \\ %{}, opts \\ []) do
-    "/swarm/update"
+    "/#{@context}/update"
     |> HTTP.add_query_params(params)
     |> HTTP.send_request(:post, body, [], opts)
   end
@@ -47,7 +49,7 @@ defmodule DockerElixirClient.Swarm do
   Get the unlock key
   """
   def get_unlock_key(opts \\ []) do
-    "/swarm/unlockkey"
+    "/#{@context}/unlockkey"
     |> HTTP.send_request(:post, %{}, [], opts)
   end
 
@@ -55,7 +57,7 @@ defmodule DockerElixirClient.Swarm do
   Unlock a locked manager
   """
   def unlock_manager(body \\ %{}, opts \\ []) do
-    "/swarm/unlockkey"
+    "/#{@context}/unlockkey"
     |> HTTP.send_request(:post, body, [], opts)
   end
 end
