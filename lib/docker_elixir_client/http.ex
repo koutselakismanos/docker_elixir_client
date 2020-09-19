@@ -20,10 +20,6 @@ defmodule DockerElixirClient.HTTP do
     request!(method, url, body, json_headers, merged_opts)
   end
 
-  def add_query_params(url, params) do
-    "#{url}?#{URI.encode_query(params)}"
-  end
-
   def process_request_body(""), do: ""
 
   def process_request_body(body), do: Poison.encode!(body)
@@ -31,4 +27,24 @@ defmodule DockerElixirClient.HTTP do
   def process_response_body(""), do: ""
 
   def process_response_body(body), do: Poison.decode!(body)
+
+  def add_query_params(url, params) do
+    "#{url}?#{URI.encode_query(params)}"
+  end
+
+  def parse_response(%HTTPoison.Response{
+        status_code: status_code,
+        body: body,
+        headers: headers,
+        request: request,
+        request_url: request_url
+      }) do
+    {:ok,
+     %{
+       body: body,
+       headers: headers,
+       request: request,
+       request_url: request_url
+     }, status_code}
+  end
 end
